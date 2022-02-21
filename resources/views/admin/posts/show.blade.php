@@ -7,6 +7,11 @@
             <div class="card">
                 <div class="card-header"><h4>{{$post->title}}</h4></div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        @if ($post->image)
+                        <img src="{{asset("storage/{$post->image}")}}" alt="">
+                        @endif
+                    </div>
                     <strong>Stato:</strong>
                     @if ($post->published)
                         <span class="badge badge-success">Pubblicato</span>

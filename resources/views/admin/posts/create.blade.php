@@ -43,9 +43,24 @@
                             <input type="checkbox" class="form-check-input" id="published" >
                             <label class="form-check-label" for="published">Pubblica</label>
                         </div>
-                        <div class="form-group custom-file mb-2">
-                            <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="image">Add Image</label>
+                        <div class="form-group">
+                            
+                            <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
+                            <label for="image">Add Image</label>
+                            <input type="file" id="image" name="image" onchange="PreviewImage();">
+                            <script type="text/javascript">
+
+                            function PreviewImage() {
+                                var oFReader = new FileReader();
+                                oFReader.readAsDataURL(document.getElementById("image").files[0]);
+
+                                oFReader.onload = function (oFREvent) {
+                                    document.getElementById("uploadPreview").src = oFREvent.target.result;
+                                };
+                            };
+
+                            </script>
+                            
                         </div>
                         <button type="submit" class="btn btn-primary">Crea</button>
                     </form>

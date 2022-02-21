@@ -9,7 +9,7 @@
                     <h4>Modifica post: {{$post->title}}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('posts.update', $post->id)}}" method="POST">
+                    <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -47,6 +47,26 @@
                             @endphp
                             <input type="checkbox" class="form-check-input" id="published" {{$published ? 'checked' : ''}}>
                             <label class="form-check-label" for="published">Pubblica</label>
+                        </div>
+                        <div class="form-group">
+                            @if ($post->image)
+                                <img id="uploadPreview" width="100" src="{{asset("storage/{$post->image}")}}">
+                            @endif
+                            <label for="image">Add Image</label>
+                            <input type="file" id="image" name="image" onchange="PreviewImage();">
+                            <script type="text/javascript">
+
+                            function PreviewImage() {
+                                var oFReader = new FileReader();
+                                oFReader.readAsDataURL(document.getElementById("image").files[0]);
+
+                                oFReader.onload = function (oFREvent) {
+                                    document.getElementById("uploadPreview").src = oFREvent.target.result;
+                                };
+                            };
+
+                            </script>
+                            
                         </div>
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>

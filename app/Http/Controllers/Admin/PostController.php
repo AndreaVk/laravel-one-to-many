@@ -142,6 +142,12 @@ class PostController extends Controller
         $post->published = isset($data['published']);
         $post->category_id = $data['category_id'];
 
+        if(isset($data['image'])){
+            Storage::delete($post->image);
+            $path_image = Storage::put('uploads', $data['image']);
+            $post->image = $path_image;
+        }
+
 
 
         $post->save();
@@ -157,6 +163,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->image){
+            Storage::delete($post->image);
+        }
         $post->delete();
         return redirect()->route("posts.index");
     }
