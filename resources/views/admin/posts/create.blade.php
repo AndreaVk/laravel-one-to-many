@@ -9,7 +9,7 @@
                     <h4>Crea post</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('posts.store')}}" method="POST">
+                    <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Titolo</label>
@@ -42,6 +42,10 @@
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="published" >
                             <label class="form-check-label" for="published">Pubblica</label>
+                        </div>
+                        <div class="form-group custom-file mb-2">
+                            <input type="file" class="custom-file-input" id="image" name="image">
+                            <label class="custom-file-label" for="image">Add Image</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Crea</button>
                     </form>
